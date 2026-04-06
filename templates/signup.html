@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <h1>Sign Up</h1>
+
+        <form action="/signupAction"  method="post">
+            <label for="username">Username:</label> <input type="text" id="username" name="username"><br>
+            <label for="password">Password:</label> <input type="password" id="password" name="password"><br>
+
+            <label for="bio">Something about you:</label><br>
+            <textarea id="bio" name="bio" rows="5" cols="33">I was backpacking through western Europe ...
+            </textarea>
+
+            <br>
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+        <br>
+        Already have an account? <a href="/login">Login</a>
+    </body>
+
+</html>

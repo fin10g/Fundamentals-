@@ -1,0 +1,137 @@
+.body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.Menu {
+    background-color: tomato;
+    padding: 3px;
+    display: grid;
+}
+
+.MenuTitle {
+    color: white;
+    text-align: left;
+    font-size: 100px;
+    font-style: bold;
+}
+
+.MenuLinks {
+    color: white;
+    text-align: right;
+    padding-bottom: 0px;
+    font-size: 50px;
+    font-style: bold;
+}
+
+.Home {
+    display: inline-flex;
+    justify-content:left;
+    align-content:normal;
+    align-items:center;
+}
+
+.HomeText {
+    color: gray;
+    text-align: justify;
+    margin-top: 15%;
+  margin-left: 15%;
+  margin-right: 5%;
+  padding-right: 5%;
+  max-width: 50vw;
+}
+
+.AboutTitle {
+    padding-top: 7%;
+    color: tomato;
+    text-align: center;
+}
+
+.BodyTitle {
+    color: tomato;
+    text-align: center;
+}
+
+.imgdiv{
+   margin-right: 1%;
+     width: 50vw;
+     justify-content: center;
+}
+
+.img {
+    border-radius: 50%;
+    margin-top: 15%;
+    max-width: 80%;
+  margin-left: 15%;
+}
+
+.Pricing {
+    display: flex;
+    justify-content: center;
+}
+
+.flex-container {
+    justify-content: center;
+    display: flex;
+}
+
+.ul {
+    margin-right: 10%;
+  content: '✓';
+  list-style-position: outside;
+  text-align: left;
+}
+
+.ulx{
+     content: 'x';
+  margin-right: 10%;
+    list-style-position: outside;
+  text-align: left;
+
+}
+
+.li {
+    list-style-type: '✓  ';
+    margin: 5px;
+}
+
+.lix {
+    list-style-type: 'x    ';
+    margin: 5px;
+}
+
+.free {
+    content: '✓';
+    color:white;
+    background-color: grey;
+    margin: 1%;
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    width: 25%;
+    border-radius: 15%;
+    text-align: center;
+}
+
+.charged {
+    content: '✓';
+    color:white;
+    background-color: tomato;
+    margin: 1%;
+    padding-top: 15px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-bottom: 30px;
+    width: 25%;
+    border-radius: 15%;
+    text-align: center;
+}
+
+.about {
+    margin-left: 20%;
+    margin-right: 20%;
+
+}
+h3 {
+    color: grey
+}
