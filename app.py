@@ -52,7 +52,7 @@ def search():
                </html>
            '''
     connection = None
-    cursor = None
+    cursor = None  #Workaround for UnboundLocalError
     try:
         connection = mysql.connector.connect(
                                 #host="127.0.0.1",
@@ -68,6 +68,7 @@ def search():
             myquery = "SELECT * FROM wiki WHERE item = %s"
             cursor.execute(myquery, [item])
             records = cursor.fetchall()
+            output = ''.join([r[2] for r in records])   #
 
             if records:
                 htmlOutput = '''
@@ -93,7 +94,7 @@ def search():
                                 </head>
                                 <body>
                                     <h2>Results for: ''' + item + '''</h2>
-                                    <pre>''' + ''.join([str(r) for r in records]) + '''</pre>
+                                    <pre>''' + output + '''</pre>
                                     <a class="back" href="/search">Search again</a>
                                 </body>
                                 </html>
