@@ -28,11 +28,11 @@ def search():
     item = request.args.get("item")
     instance_ip = "52.213.198.252"  # Public IP# CHANGE THIS
     securityKeyFile = "/home/student/.ssh/UbuntuCT169.pem"  # CHANGE THIS
-    searchTerm = item # CHANGE THIS
+    searchTerm = item
     #cmd = "python3 ~/Desktop/1SDC1/Semester 2/Fundamentals of Cloud/Assignment Project/wiki.py"  # CHANGE THIS
-    cmd = "python3 ~/FlaskAssignment/wiki.py"  # CHANGE THIS
+    cmd = "python3 ~/FlaskAssignment/wiki.py"
 
-
+    # Presents user with a search input box if query hasn't already been submitted
     if not item:
         return '''
                <!DOCTYPE html>
@@ -51,9 +51,11 @@ def search():
                </body>
                </html>
            '''
+
     connection = None
     cursor = None  #Workaround for UnboundLocalError
     try:
+        # Connect to MySQL Database VM
         connection = mysql.connector.connect(
                                 #host="127.0.0.1",
                                 #host="10.0.2.2",
@@ -63,13 +65,15 @@ def search():
                                 password="mypassword",
                                 database="wiki")
 
+        # Check Database for Search Input Item
         if connection.is_connected():
             cursor = connection.cursor()
             myquery = "SELECT * FROM wiki WHERE item = %s"
             cursor.execute(myquery, [item])
             records = cursor.fetchall()
-            output = ''.join([r[2] for r in records])   #
+            output = ''.join([r[2] for r in records])   # Extracts a text from results column in database
 
+            # If item is found return corresponding results column
             if records:
                 htmlOutput = '''
                             <!DOCTYPE html>
