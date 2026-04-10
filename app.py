@@ -56,7 +56,8 @@ def search():
     try:
         connection = mysql.connector.connect(
                                 #host="127.0.0.1",
-                                host="10.0.2.2",
+                                #host="10.0.2.2",
+                                host="192.168.56.6",
                                 port=7888,
                                 user="root",
                                 password="mypassword",
@@ -137,7 +138,8 @@ def search():
         try:
             connection = mysql.connector.connect(
                 #host="127.0.0.1",
-                host="10.0.2.2",
+                #host="10.0.2.2",
+                host="192.168.56.6",
                 port=7888,
                 user="root",
             password="mypassword",

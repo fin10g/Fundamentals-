@@ -22,5 +22,4 @@ Browser
 http://127.0.0.1:3000/search
 Search: Paul Thomas Anderson
 
-Added connection= none and cursor = None, but it's not a good solution. revert back as well as finally
-Real issue is port forwarding from 3306:7888 on the mysql VM - Almost there.
+mysql vm ip: 192.168.56.6
