@@ -26,10 +26,9 @@ def signup():
 @app.route('/search', methods=['GET'])
 def search():
     item = request.args.get("item")
-    instance_ip = "54.217.225.49"  # Public IP# CHANGE THIS
+    instance_ip = "52.213.198.252"  # Public IP# CHANGE THIS
     securityKeyFile = "/home/student/.ssh/UbuntuCT169.pem"  # CHANGE THIS
     searchTerm = item # CHANGE THIS
-
     #cmd = "python3 ~/Desktop/1SDC1/Semester 2/Fundamentals of Cloud/Assignment Project/wiki.py"  # CHANGE THIS
     cmd = "python3 ~/FlaskAssignment/wiki.py"  # CHANGE THIS
 
@@ -43,7 +42,7 @@ def search():
                    <title>Search</title>
                </head>
                <body>
-                   <h2>Search</h2>
+                   <h2>Search (Case Sensitive)</h2>
                    <form method="GET" action="/search">
                        <label>Item: </label>
                        <input type="text" name="item" placeholder="Enter item"/>
@@ -52,8 +51,12 @@ def search():
                </body>
                </html>
            '''
+    connection = None
+    cursor = None
     try:
-        connection = mysql.connector.connect(host="127.0.0.1",
+        connection = mysql.connector.connect(
+                                #host="127.0.0.1",
+                                host="10.0.2.2",
                                 port=7888,
                                 user="root",
                                 password="mypassword",
@@ -87,24 +90,27 @@ def search():
                                     .back { display: block; text-align: center; margin: 20px; }
                                     </style>
                                 </head>
-                            <body>
-                        <h2>Results for: ''' + item + '''</h2>
-                    <pre>''' + ''.join([str(r) for r in records]) + '''</pre>
-               <a class="back" href="/search">Search again</a>
-           </body>
-           </html>
-       '''
-        return htmlOutput
+                                <body>
+                                    <h2>Results for: ''' + item + '''</h2>
+                                    <pre>''' + ''.join([str(r) for r in records]) + '''</pre>
+                                    <a class="back" href="/search">Search again</a>
+                                </body>
+                                </html>
+                                '''
+                return htmlOutput
 
     except Error as e:
             print("Error while connecting to MySQL", e)
 
     finally:
-        if connection.is_connected():
-            cursor.close()
+        if connection and connection.is_connected():
+            if cursor:
+                cursor.close()
             connection.close()
             print("MySQL connection is closed")
 
+    connection = None
+    cursor = None
     try:
         # Connect/ssh to an instance
         client = paramiko.SSHClient()
@@ -120,9 +126,9 @@ def search():
         output = stdout.readlines()
 
         # Get/Use the result (unnecessary after insert?)
-        #print("output:", output)
-        #for items in output:
-         #   print(items, end="")
+        print("output:", output)
+        for items in output:
+            print(items, end="")
 
         # Close the client connection once the job is done
         client.close()
@@ -130,7 +136,8 @@ def search():
         # Save Results to MySQL after reception from wiki.py
         try:
             connection = mysql.connector.connect(
-                host="127.0.0.1",
+                #host="127.0.0.1",
+                host="10.0.2.2",
                 port=7888,
                 user="root",
             password="mypassword",
@@ -145,8 +152,9 @@ def search():
         except Error as e:
             print("Error while saving to MySQL", e)
         finally:
-            if connection.is_connected():
-                cursor.close()
+            if connection and connection.is_connected():
+                if cursor:
+                    cursor.close()
                 connection.close()
 
         htmlOutput =  '''
